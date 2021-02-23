@@ -39,3 +39,5 @@ jobs:
     - name: Run tests
       run: |
         nix run github:jacg/flakes-learning-curve/shellspec -- --color --shell bash
+        git checkout first-flake
+        nix run github:jacg/flakes-learning-curve/shellspec -- --color --shell bash
