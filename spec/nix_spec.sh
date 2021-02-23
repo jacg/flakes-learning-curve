@@ -35,30 +35,29 @@ Describe 'nix'
 
 # --------------------------------------------------------------------------------
 
-  It 'nix build'
-    When call nix build
-    The status should be failure
-    The error should include 'does not provide attribute'
-    The error should include 'defaultPackage'
-  End
+  # TODO need to check something about result
+  # It 'nix build'
+  #   When call nix build
+  #   The status should be success
+  # End
 
   # --------------------------------------------------------------------------------
 
   It 'nix shell'
-  When call nix shell
-  The status should be failure
-  The error should include 'does not provide attribute'
-  The error should include 'defaultPackage'
+    When call nix shell --command aaa
+    The status should be success
+    The output should equal 'This is program AAA.'
   End
 
 # --------------------------------------------------------------------------------
 
-  It 'nix develop'
-    When call nix develop
-    The status should be failure
-    The error should include 'does not provide attribute'
-    The error should include 'defaultPackage'
-  End
+  # TODO how to deal with testing something inside the resulting shell
+  # It 'nix develop'
+  #   When call nix develop
+  #   The status should be failure
+  #   The error should include 'does not provide attribute'
+  #   The error should include 'defaultPackage'
+  # End
 
 # --------------------------------------------------------------------------------
   It 'run'
@@ -67,8 +66,9 @@ Describe 'nix'
     # include such a binary, so `nix run` will fail:
     When call nix run
     The status should be failure
-    The error should include 'cannot find flake attribute'
-    The error should include "#defaultApp."
+    The error should include 'unable to execute'
+    The error should include "flake-learning-curve/bin/flake-learning-curve"
+    The error should include "No such file or directory"
   End
   # Next we'll see two approaches to getting this to work:
   # 1. Set a binary with the appropritate name.

@@ -8,7 +8,7 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = import nixpkgs { inherit system; }; in
-      {
+      rec {
         packages.aaa-and-bbb = pkgs.stdenv.mkDerivation {
           name = "flake-learning-curve";
           src = self;
@@ -28,6 +28,8 @@
           '';
 
         };
+
+        defaultPackage = packages.aaa-and-bbb;
 
       });
 }
